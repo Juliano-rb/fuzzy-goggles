@@ -144,11 +144,24 @@ telegram.on("text", (message) => {
 		//Chama a funcao de calcular o a pontuacao da pessoa
 		var resultado = pontuacao(message.text);
 		//Sò imprime que alguém fez a requisição, o message.chat.id é porque eu queria imprimir o username da pessoa mas não achei como, depois vejo melhor
-		console.log(message.chat.id + " pediu a sua classificacao");
+		console.log(message.chat.id + " pediu a sua pontuacao");
 		
 		//Imprime os valores obtidos pela funçao pontuacao();
 		telegram.sendMessage(message.chat.id, "Pontuação como Espião: " + resultado[0] + "\nPontuação como Agente: " + resultado[1]);
 		
 	}
 	
+});
+
+telegram.on("inline_query", (query) => {
+  telegram.answerInlineQuery(query.id, [
+    {
+      type: "article",
+      id: "testarticle",
+      title: "Hello world",
+      input_message_content: {
+        message_text: "Hello, world! This was sent from my super cool inline bot."
+      }
+    }
+  ]);
 });
