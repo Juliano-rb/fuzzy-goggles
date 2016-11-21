@@ -156,12 +156,12 @@ telegram.on("text", (message) => {
 telegram.on("inline_query", (query) => {
   telegram.answerInlineQuery(query.id, [
     {
-      type: "article",
-      id: "testarticle",
-      title: "Hello world",
+      type: "Mensagem",
+      id: "Pontuacao",
+      title: "Pontuar Estatisticas",
       input_message_content: {
-        message_text: "Hello, world! This was sent from my super cool inline bot."
+        message_text: "Pontuação como Espião: " + resultado[0] + "\nPontuação como Agente: " + resultado[1]
       }
     }
-  ]);
+]);
 });
