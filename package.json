@@ -1,0 +1,27 @@
+{
+  "name": "pontuatorbot",
+  "version": "1.0.0",
+  "description": "A bot for classification of @PlaySpyfallBot Telegram bot players",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Juliano-rb/pontuatorBot.git"
+  },
+  "keywords": [
+    "bot",
+    "telegram",
+    "spybot"
+  ],
+  "author": "Juliano Rocha",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/Juliano-rb/pontuatorBot/issues"
+  },
+  "homepage": "https://github.com/Juliano-rb/pontuatorBot#readme",
+  "dependencies": {
+    "node-telegram-bot-api": "^0.24.0"
+  }
+}
