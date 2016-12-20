@@ -1,8 +1,8 @@
-﻿'use strict';
+ï»¿'use strict';
 
 var TelegramBot = require('telebot'),
     // Be sure to replace YOUR_BOT_TOKEN with your actual bot token on this line.
-    telegram = new TelegramBot("275559857:AAHjz1pm7bCa7kI-Bx4GEMn8_f8lw2IRl2U");
+    telegram = new TelegramBot("BOT_TOKEN");
 
 //console.log("Servidor iniciado...");
 
@@ -22,7 +22,7 @@ var TelegramBot = require('telebot'),
 	}
 }
 */
-//Configura��o de pesos
+//Configuração de pesos
 var config = {
 	spy: [3,-1,-2,2],
 	agent:[3,-3,0,-2,2]
@@ -55,7 +55,7 @@ function loader(str){
 			}
 			
 			this.atLineNumber++;
-			//Faz come�ar ap�s o \n na proxima chamada da funcao
+			//Faz começar após o \n na proxima chamada da funcao
 			this.lineStartIndex = this.endOfLine+1;
 			return this.atLine;
 		}
@@ -78,13 +78,13 @@ function lastNumber(str){
 
 function pontuacao(msg){
 
-	//Variavel (objeto) que ser� armazenado o resultado ap�s as multiplica��es
+	//Variavel (objeto) que será armazenado o resultado após as multiplicações
 	var result = {
 		spy: [0,0,0,0],
 		agent:[0,0,0,0,0]
 	}
 	
-	//Corta tudo que tiver antes de "Como espi�o"..
+	//Corta tudo que tiver antes de "Como espião"..
 	var dados = msg.slice(msg.indexOf("Como"));
 	//console.log("DADOS__"+dados);
 	
@@ -101,11 +101,11 @@ function pontuacao(msg){
 	var index = 0;
 	var total = [0,0];
 	while(line != -1){
-		if(line == "Como espião:"){
+		if(line == "Como espiÃ£o:"){
 			load = 1;
 			index = 0;
 		}
-		//Load muda de 1 para 2 quando encontra a string "Como agente secreto:" e ent�o o indice � reiniciado
+		//Load muda de 1 para 2 quando encontra a string "Como agente secreto:" e então o indice é reiniciado
 		else if(line == "Como agente secreto:"){
 			load = 2;
 			index = 0;
@@ -148,13 +148,13 @@ function pontuacao(msg){
 		}
 	)};
 	
-	telegram.sendMessage(message.chat.id, nameToShow + "Me envie a sua classifica��o do @PlaySpyfallBot", opts).then(function (sended) {
+	telegram.sendMessage(message.chat.id, nameToShow + "Me envie a sua classificação do @PlaySpyfallBot", opts).then(function (sended) {
 		var chatId = sended.chat.id;
 		var messageId = sended.message_id;
 		telegram.onReplyToMessage(chatId, messageId, function (message) {
 			//Chama a funcao de calcular o a pontuacao da pessoa
 			var resultado = pontuacao(message.text);
-			var str = "Pontuacao de @"+ nameToShow + ":\n?? Como Espião: " + resultado[0] + "\n?? Como Agente: " + resultado[1];
+			var str = "Pontuacao de @"+ nameToShow + ":\n?? Como EspiÃ£o: " + resultado[0] + "\n?? Como Agente: " + resultado[1];
 			
 			telegram.sendMessage(message.chat.id, str)
 			console.log('User is %s years old', message.text);
@@ -163,13 +163,13 @@ function pontuacao(msg){
 }*/
 
 function sendError(id, userName, reply){
-	telegram.sendMessage(id, "@"+userName + ", não consigo entender a mensagem enviada😁\nTente copiar e mandar a mensagem exatamente como está nas estatístiacas do @PlaySpyfallBot", {reply});
+	telegram.sendMessage(id, "@"+userName + ", nÃ£o consigo entender a mensagem enviadaðŸ˜\nTente copiar e mandar a mensagem exatamente como estÃ¡ nas estatÃ­stiacas do @PlaySpyfallBot", {reply});
 }
 
 telegram.on("/pontuar", (message) => {
 	console.log("ON");
 	
-	//O if verifica se na mensagem que o  usuario mandou comntem "Como espião", supõe-se se esta frase então ele ta mandando as estatisticas
+	//O if verifica se na mensagem que o  usuario mandou comntem "Como espiÃ£o", supÃµe-se se esta frase entÃ£o ele ta mandando as estatisticas
 	var username = "@"+message.from.username;
 	//var username = message.chat.username;
 	//var username = message.chat.username;	
@@ -182,12 +182,12 @@ telegram.on("/pontuar", (message) => {
 	
 	//if(message.text.indexOf("/pontuar") == 0 ){
 		
-		//Se existe essa string ent�o sup�e-se que o resto da mensagem esta de acordo
-	if(message.text.indexOf("Como espião") != -1){
+		//Se existe essa string então supõe-se que o resto da mensagem esta de acordo
+	if(message.text.indexOf("Como espiÃ£o") != -1){
 		//Chama a funcao de calcular a pontuacao da pessoa
 		var reply = message.message_id;
 		var resultado = pontuacao(message.text);
-		var str = "Pontuacao de "+ nameToShow + ":\n😎 Como Espião: " + resultado[0] + "\n🕵 Como Agente: " + resultado[1];
+		var str = "Pontuacao de "+ nameToShow + ":\nðŸ˜Ž Como EspiÃ£o: " + resultado[0] + "\nðŸ•µ Como Agente: " + resultado[1];
 		
 		telegram.sendMessage(message.chat.id, str, { reply });
 		//telegram.sendMessage(message.from.id, str, { reply });
@@ -216,7 +216,7 @@ telegram.on("*", (message) => {
 		var nameToShow = (username != "undefined")? username: username;
 		var reply = message.message_id;
 		
-		telegram.sendMessage(message.chat.id, "Olha a boca " + username + ", aqui é um grupo de familia.", { reply });
+		telegram.sendMessage(message.chat.id, "Olha a boca " + username + ", aqui Ã© um grupo de familia.", { reply });
 	}
 });
 
@@ -227,7 +227,7 @@ telegram.on("edited", (message) => {
 	//var nameToShow = (firstname != "undefined")? firstname: username;
 	var reply = message.message_id;
 	console.log("alguem editou");
-	telegram.sendMessage(message.chat.id, "hmm... 👀", { reply });
+	telegram.sendMessage(message.chat.id, "hmm... ðŸ‘€", { reply });
 });
 
 telegram.on("userLeft", (message) => {
@@ -246,7 +246,7 @@ telegram.on("userJoined", (message) => {
 	var firstname = message.new_chat_member.first_name;
 	var nameToShow = (username!="undefined"? username : firstname);
 	var date = new Date();
-	telegram.sendMessage(message.chat.id, "Bem vindo à missão, agente "+nameToShow+ ". Que a força esteja com você.");
+	telegram.sendMessage(message.chat.id, "Bem vindo Ã  missÃ£o, agente "+nameToShow+ ". Que a forÃ§a esteja com vocÃª.");
 });
 telegram.on("new_chat_photo", (message) => {
 	telegram.sendMessage(message.chat.id,"Acho que esta realmente ficou melhor.");
@@ -260,7 +260,7 @@ telegram.on("new_chat_photo", (message) => {
       id: "Pontuacao",
       title: "Pontuar Estatisticas",
       input_message_content: {
-        message_text: "Pontua��o como Espi�o: " + resultado[0] + "\nPontua��o como Agente: " + resultado[1]
+        message_text: "Pontuação como Espião: " + resultado[0] + "\nPontuação como Agente: " + resultado[1]
       }
     }
 	]);
